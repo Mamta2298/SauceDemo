@@ -23,6 +23,6 @@ public class Hooks extends BaseClass  {
             scenario.attach(screenshot, "image/png", scenario.getName());
             //BaseClass.quit();
         }
-        BaseClass.quit();
+       BaseClass.quit();
     }
 }
