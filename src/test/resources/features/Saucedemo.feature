@@ -11,10 +11,10 @@ Feature: user able
       And verify add to cart button is toggled to remove button for "Sauce Labs Fleece Jacket"
       And verify add to cart button is toggled to remove button for "Sauce Labs Bolt T-Shirt"
       Then verify user successfully added "Sauce Labs Fleece Jacket,Sauce Labs Bolt T-Shirt" items in the cart
-      Then user is navigated to cart and checkout
+      Then user checkouts the order
       Then user navigated to address details page and enters address
       Then verify user navigated to order preview page
-      Then verify details on order preview page
+      Then verify details on order preview page showing "Sauce Labs Fleece Jacket,Sauce Labs Bolt T-Shirt" items
       Then user clicks on finish button and navigated to order completion page
       And verify order is placed successfully
       And user logs off successfully

@@ -22,10 +22,14 @@ public class DashboardPage extends BaseClass {
     private static By products = By.xpath("//span[text()='Products']");
     private static By filter = By.xpath("//select[@class=\"product_sort_container\"]");
     private static By About = By.xpath("//a[text()='About']");
-private static By menu = By.xpath("//button[text()='Open Menu']");
+    private static By menu = By.xpath("//button[text()='Open Menu']");
+    private static By finishButton = By.id("finish");
+    private static  By logsOFF = By.id("logout_sidebar_link");
     public void clickOnAddToCart(String productName) {
         driver.findElement(By.xpath(" //div[text()='" + productName + "']/parent::a/parent::div/following-sibling::div/button\n")).click();
     }
+
+    //div[text()='Sauce Labs Fleece Jacket']/parent::a/parent::div/following-sibling::div/button\n
     //button[text()='Remove']/parent::div/parent::div
     public void validateDashboardPage()
     {
@@ -70,6 +74,7 @@ private static By menu = By.xpath("//button[text()='Open Menu']");
     }
 
     public void clickOnFilter() {
+        driver.findElement(filter).click();
     }
 
     public void clickOnCheckout() {
@@ -112,7 +117,7 @@ private static By menu = By.xpath("//button[text()='Open Menu']");
 
     }
 
-    public void verifyOrderDetails() {
+    public void verifyOrderDetails(String productList) {
         String[] listOfLabels = {"Payment Information","Shipping Information","Price Total"};
         int i = 0;
         List<WebElement> labels = driver.findElements(By.xpath("//div[@class=\"summary_info_label\"]"));
@@ -122,8 +127,35 @@ private static By menu = By.xpath("//button[text()='Open Menu']");
             i++;
 
         }
+
+        List<WebElement> orderList = driver.findElements(By.xpath("//div[@class=\"inventory_item_name\"]"));
+        for(WebElement order : orderList)
+        {
+            Assert.assertTrue("Items are not added",productList.contains(order.getText()));
+        }
+
     }
 
-    
+
+    public void clickOnFinish() {
+        driver.findElement(finishButton).click();
+    }
+
+    public void verifyOrderIsPlacedSuccessfully() {
+       Assert.assertEquals("Order is not placed","Thank you for your order!",driver.findElement(By.tagName("h2")).getText());
+    }
+
+    public void clickAndVerifyUserLogsOffSuccessfully() {
+    driver.findElement(logsOFF).click();
+    Assert.assertEquals("user not able to logs off successfully","https://www.saucedemo.com/",driver.getCurrentUrl());
+    }
+
+    public void VerifyProductsAreSorted() {
+       List<WebElement> prodNameList = driver.findElements(By.xpath("//div[@class=\'inventory_item_name\']"));
+       for(WebElement products : prodNameList )
+       {
+           System.out.println(products.getText());
+       }
+    }
 }
 

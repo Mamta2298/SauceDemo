@@ -37,16 +37,6 @@ DashboardPage dashboardPage = new DashboardPage();
         dashboardPage.validateDashboardPage();
     }
 
-    @Given("user select item bagpack and add it to cart")
-    public void user_select_item_bagpack_and_add_it_to_cart() {
-
-    }
-
-    @When("user select item shirt and add it to cart")
-    public void user_select_item_shirt_and_add_it_to_cart() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 
 //    @Then("verify user successfully added {String} items in the cart")
 //    public void verify_user_successfully_added_items_in_the_cart(String noOfItems) {
@@ -54,7 +44,7 @@ DashboardPage dashboardPage = new DashboardPage();
 //    }
 
 
-    @Then("user is navigated to cart and checkout")
+    @Then("user checkouts the order")
     public void user_is_navigated_to_cart_and_checkout() {
      dashboardPage.clickOnCheckout();
     }
@@ -77,13 +67,13 @@ DashboardPage dashboardPage = new DashboardPage();
 
     @Then("verify order is placed successfully")
     public void verify_order_is_placed_successfully() {
-
+      dashboardPage.verifyOrderIsPlacedSuccessfully();
     }
 
     @Then("user logs off successfully")
     public void user_logs_off_successfully() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+      dashboardPage.clickOnMenu();
+      dashboardPage.clickAndVerifyUserLogsOffSuccessfully();
     }
 
     @Given("user select item {string} and add it to cart")
@@ -102,10 +92,6 @@ DashboardPage dashboardPage = new DashboardPage();
         dashboardPage.clickOnFilter();
     }
 
-    @And("select option low to high")
-    public void selectOptionLowToHigh() {
-        
-    }
 
     @Then("verify that products are sorted as per selection")
     public void verifyThatProductsAreSortedAsPerSelection() {
@@ -114,6 +100,7 @@ DashboardPage dashboardPage = new DashboardPage();
 
     @And("select option A to Z")
     public void selectOptionAToZ() {
+        dashboardPage.VerifyProductsAreSorted();
     }
 
     @And("verify add to cart button is toggled to remove button for {string}")
@@ -123,7 +110,7 @@ DashboardPage dashboardPage = new DashboardPage();
 
     @And("select option {string}")
     public void selectOption(String filterText) {
-dashboardPage.clickOnFilter(filterText);
+     dashboardPage.clickOnFilter(filterText);
     }
 
     @Then("user navigate to saucelabs page")
@@ -140,12 +127,12 @@ dashboardPage.clickOnAbout();
     @Given("user click on menu sidebar")
     public void userClickOnMenuSidebar() {
 
-dashboardPage.clickOnMenu();
+       dashboardPage.clickOnMenu();
     }
 
-    @Then("verify details on order preview page")
-    public void verifyDetailsOnOrderPreviewPage() {
-        dashboardPage.verifyOrderDetails();
+    @Then("verify details on order preview page showing {string} items")
+    public void verifyDetailsOnOrderPreviewPage(String productList) {
+        dashboardPage.verifyOrderDetails(productList);
     }
 }
 
